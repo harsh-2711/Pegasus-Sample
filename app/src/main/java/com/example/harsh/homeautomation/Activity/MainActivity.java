@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     Button enter;
     String onoff = "0";
     Button logOut;
+    Button random;
     boolean isStarted = false;
     public TextView textInfo1, textInfo2, textInfo3, textInfo4;
     View.OnClickListener btnOnOffClickListener = new View.OnClickListener() {
@@ -112,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+
     };
 
     @SuppressLint("JavascriptInterface")
@@ -139,6 +142,13 @@ public class MainActivity extends AppCompatActivity {
         textInfo2 = (TextView) findViewById(R.id.info2);
         textInfo3 = (TextView) findViewById(R.id.info3);
         textInfo4 = (TextView) findViewById(R.id.info4);
+        random = (Button)findViewById(R.id.random_button);
+        random.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,RoomActivity.class));
+            }
+        });
 
         btnOn.setOnClickListener(btnOnOffClickListener);
         btnOff.setOnClickListener(btnOnOffClickListener);
@@ -155,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                 browser.loadUrl("http://" + editIp.getText().toString());
                 browser.getSettings().setJavaScriptEnabled(true);
                 browser.addJavascriptInterface(new WebAppInterface(getApplication()), "Android");
+
 
                 // Till here
                // browser.loadUrl("http://" + editIp.getText().toString());   // 192.168.43.79   Online server - 14.139.122.116
