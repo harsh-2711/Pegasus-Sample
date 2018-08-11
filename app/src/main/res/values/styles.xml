@@ -27,5 +27,13 @@
         <item name="colorControlNormal">@color/colorText</item>
         <item name="colorControlActivated">@color/colorText</item>
     </style>
+    <style name="SwitchCompatTheme" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/grey</item>
+
+        <item name="colorSwitchThumbNormal">@color/black</item>
+        <!-- inactive track color (30% transparency) -->
+        <item name="colorControlNormal">@color/grey</item>
+    </style>
 
 </resources>
