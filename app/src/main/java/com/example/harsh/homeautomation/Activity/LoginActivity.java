@@ -1,8 +1,10 @@
 package com.example.harsh.homeautomation.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -18,6 +20,9 @@ import com.example.harsh.homeautomation.R;
 import com.example.harsh.homeautomation.sql.DataBaseHelper;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String PREFS_NAME = "LoginActivity";
+
     private final AppCompatActivity activity = LoginActivity.this;
 
     private NestedScrollView nestedScrollView;
@@ -35,15 +40,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private InputValidation inputValidation;
     private DataBaseHelper databaseHelper;
 
+    private static SharedPreferences preferences;
+    private static Boolean isLoggedIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-        initViews();
-        initListeners();
-        initObjects();
+        preferences = getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
+        isLoggedIn = preferences.getBoolean("isLoggedIn",false);
+
+        if(isLoggedIn) {
+            Intent accountsIntent = new Intent(activity, MainActivity.class);
+            startActivity(accountsIntent);
+        }
+        else {
+            initViews();
+            initListeners();
+            initObjects();
+        }
     }
 
     /**
@@ -119,6 +136,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 , textInputEditTextPassword.getText().toString().trim())) {
 
 
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("isLoggedIn",true);
+            editor.apply();
             Intent accountsIntent = new Intent(activity, MainActivity.class);
           //  accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
@@ -141,5 +161,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void emptyInputEditText() {
         textInputEditTextEmail.setText(null);
         textInputEditTextPassword.setText(null);
+    }
+
+    public static void setLogInStatus(boolean isLogged) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("isLoggedIn",isLogged);
+        editor.apply();
     }
 }

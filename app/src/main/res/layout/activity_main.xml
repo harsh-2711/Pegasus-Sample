@@ -85,6 +85,14 @@
         android:textSize="20sp"
         android:layout_marginBottom="15dp"/>
 
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.example.harsh.homeautomation.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnOn, btnOff;
     Button enter;
     String onoff = "0";
+    Button logOut;
     boolean isStarted = false;
     public TextView textInfo1, textInfo2, textInfo3, textInfo4;
     View.OnClickListener btnOnOffClickListener = new View.OnClickListener() {
@@ -118,6 +120,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        logOut = (Button) findViewById(R.id.log_out);
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginActivity.setLogInStatus(false);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //Change
         editIp = (EditText) findViewById(R.id.ip);
         btnOn = (Button) findViewById(R.id.bon);
