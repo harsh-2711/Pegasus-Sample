@@ -1,4 +1,4 @@
-package com.example.harsh.homeautomation;
+package com.example.harsh.homeautomation.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.harsh.homeautomation.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
