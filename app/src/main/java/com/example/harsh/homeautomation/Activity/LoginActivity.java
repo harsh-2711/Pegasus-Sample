@@ -49,14 +49,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-        preferences = getSharedPreferences("PREFS_NAME",MODE_PRIVATE);
-        isLoggedIn = preferences.getBoolean("isLoggedIn",false);
+        preferences = getSharedPreferences("PREFS_NAME", MODE_PRIVATE);
+        isLoggedIn = preferences.getBoolean("isLoggedIn", false);
 
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             Intent accountsIntent = new Intent(activity, MainActivity.class);
             startActivity(accountsIntent);
-        }
-        else {
+        } else {
             initViews();
             initListeners();
             initObjects();
@@ -137,10 +136,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("isLoggedIn",true);
+            editor.putBoolean("isLoggedIn", true);
             editor.apply();
             Intent accountsIntent = new Intent(activity, MainActivity.class);
-          //  accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+            //  accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
             startActivity(accountsIntent);
 
@@ -165,7 +164,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static void setLogInStatus(boolean isLogged) {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("isLoggedIn",isLogged);
+        editor.putBoolean("isLoggedIn", isLogged);
         editor.apply();
     }
 }

@@ -18,6 +18,7 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.Hold
 
     private Context mContext;
     private List<Appliance> applianceList;
+    private final OnItemClickListener listener;
 
 
     static {
@@ -50,12 +51,21 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.Hold
             powerConsumed.setText(appliance.getPowerConsumed());
             applianceStatus.setChecked(appliance.getStatus());
             timeElapsed.setText(String.valueOf(appliance.getTimeElapsed()));
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(appliance);
+                }
+            });
         }
     }
 
-    public ApplianceAdapter(Context mContext, List<Appliance> applianceList) {
+    public ApplianceAdapter(Context mContext, List<Appliance> applianceList, OnItemClickListener listener) {
         this.mContext = mContext;
         this.applianceList = applianceList;
+        this.listener = listener;
     }
 
     @Override
