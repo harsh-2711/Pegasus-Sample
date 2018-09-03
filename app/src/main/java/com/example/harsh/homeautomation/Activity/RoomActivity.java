@@ -21,20 +21,22 @@ public class RoomActivity extends AppCompatActivity {
     List<Room> room;
     RecyclerView listView;
     private RoomAdapter adapter;
-
+    private String[] defaultAppliances;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         listView = findViewById(R.id.listview);
-
+        defaultAppliances = new String[]{"Light","Fan","Switch",};
         room = new ArrayList<>();
 
         adapter = new RoomAdapter(this, room, new RoomAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Room item) {
-                startActivity(new Intent(RoomActivity.this, AppliancesActivity.class));
+                Intent i = new Intent(RoomActivity.this, AppliancesActivity.class);
+                i.putExtra("Room",item);
+                startActivity(i);
             }
         });
         int rows = this.getResources().getConfiguration().orientation
@@ -55,8 +57,8 @@ public class RoomActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            room.add(new Room("Bedroom", R.drawable.ic_bed));
-            room.add(new Room("Study Room", R.drawable.study_room));
+            room.add(new Room("Bedroom", R.drawable.ic_bed,defaultAppliances));
+            room.add(new Room("Study Room", R.drawable.study_room,defaultAppliances));
             return null;
         }
 

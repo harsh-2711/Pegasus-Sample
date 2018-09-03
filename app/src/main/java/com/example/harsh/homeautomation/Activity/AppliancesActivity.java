@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.harsh.homeautomation.Adapter.ApplianceAdapter;
 import com.example.harsh.homeautomation.Models.Appliance;
+import com.example.harsh.homeautomation.Models.Room;
 import com.example.harsh.homeautomation.R;
 
 import java.util.ArrayList;
@@ -20,17 +22,28 @@ public class AppliancesActivity extends AppCompatActivity {
     List<Appliance> appliances;
     RecyclerView listView;
     private ApplianceAdapter adapter;
+    private String[] roomAppliances;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
+        Room room = (Room) getIntent().getSerializableExtra("Room");
+        roomAppliances = room.getAppliances();
         listView = findViewById(R.id.listview);
         appliances = new ArrayList<>();
-        adapter = new ApplianceAdapter(this,appliances);
+        adapter = new ApplianceAdapter(this, appliances, new ApplianceAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Appliance item) {
+                if(item.getName().equals("Light")){
+                    Toast.makeText(AppliancesActivity.this, "Light", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AppliancesActivity.this, "Else", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
-        
         int rows = this.getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_PORTRAIT ? 1 : 2;
         initiateViews(rows);
@@ -49,10 +62,9 @@ public class AppliancesActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            appliances.add(new Appliance("Light", false,"0","0",0));
-            appliances.add(new Appliance("Fan", true,"0","0",0));
-            appliances.add(new Appliance("AC", false,"0","0",0));
-            appliances.add(new Appliance("Geyser", true,"0","0",0));
+            for (int i = 0; i < roomAppliances.length; i++) {
+                appliances.add(new Appliance(roomAppliances[i],false,"0","0",0));
+            }
             return null;
         }
 

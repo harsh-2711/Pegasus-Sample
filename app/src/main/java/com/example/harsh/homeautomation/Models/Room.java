@@ -1,15 +1,20 @@
 package com.example.harsh.homeautomation.Models;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
 
     private String roomName;
     private int roomImage;
+    private String[] appliances;
 
-    public Room() {}
+    public Room() {
+    }
 
-    public Room(String roomName, int roomImage) {
+    public Room(String roomName, int roomImage, String[] appliances) {
         this.roomName = roomName;
         this.roomImage = roomImage;
+        this.appliances = appliances;
     }
 
     public String getRoomName() {
@@ -18,6 +23,10 @@ public class Room {
 
     public int getRoomImage() {
         return roomImage;
+    }
+
+    public String[] getAppliances() {
+        return appliances;
     }
 
     public void setRoomName(String roomName) {
