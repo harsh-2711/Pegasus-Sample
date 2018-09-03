@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.example.harsh.homeautomation.Adapter.ApplianceAdapter;
@@ -22,25 +23,33 @@ public class AppliancesActivity extends AppCompatActivity {
     List<Appliance> appliances;
     RecyclerView listView;
     private ApplianceAdapter adapter;
-    private String[] roomAppliances;
-
+    private ArrayList<String> roomAppliances;
+    private Room room;
+    private WebView browser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
-        Room room = (Room) getIntent().getSerializableExtra("Room");
+
+        // **********Web View Setting************
+
+
+        // **********Setting Ends Here***********
+
+        browser = (WebView) findViewById(R.id.browser);
+        room = (Room) getIntent().getSerializableExtra("Room");
         roomAppliances = room.getAppliances();
         listView = findViewById(R.id.listview);
         appliances = new ArrayList<>();
         adapter = new ApplianceAdapter(this, appliances, new ApplianceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Appliance item) {
-                if(item.getName().equals("Light")){
+                if(item.getName().equals("Light")) {
                     Toast.makeText(AppliancesActivity.this, "Light", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(AppliancesActivity.this, "Else", Toast.LENGTH_SHORT).show();
                 }
+                else
+                    Toast.makeText(AppliancesActivity.this, "Else", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -62,8 +71,13 @@ public class AppliancesActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            for (int i = 0; i < roomAppliances.length; i++) {
-                appliances.add(new Appliance(roomAppliances[i],false,"0","0",0));
+            for (int i = 0; i < roomAppliances.size(); i++) {
+                if(room.getRoomID() == 0) {
+                    appliances.add(new Appliance(roomAppliances.get(i),false,String.valueOf(room.getRoomID() + i + 1),"0",0));
+                }
+                else {
+                    appliances.add(new Appliance(roomAppliances.get(i),false,String.valueOf(room.getRoomID() + i + 3),"0",0));
+                }
             }
             return null;
         }

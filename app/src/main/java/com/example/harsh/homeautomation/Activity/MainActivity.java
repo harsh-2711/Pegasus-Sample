@@ -483,4 +483,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        public String getIP() {
+            return editIp.toString();
+        }
+
 }

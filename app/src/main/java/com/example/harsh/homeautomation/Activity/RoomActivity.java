@@ -21,14 +21,24 @@ public class RoomActivity extends AppCompatActivity {
     List<Room> room;
     RecyclerView listView;
     private RoomAdapter adapter;
-    private String[] defaultAppliances;
+    private ArrayList<String> defaultAppliances;
+    private ArrayList<String> room2Appliances;
+    private int roomCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         listView = findViewById(R.id.listview);
-        defaultAppliances = new String[]{"Light","Fan","Switch",};
+        defaultAppliances = new ArrayList<>();
+        defaultAppliances.add("Light");
+        defaultAppliances.add("Fan");
+        defaultAppliances.add("AC");
+        room2Appliances = new ArrayList<>();
+        room2Appliances.add("Light");
+        room2Appliances.add("Fan");
+        room2Appliances.add("AC");
+        room2Appliances.add("Heater");
         room = new ArrayList<>();
 
         adapter = new RoomAdapter(this, room, new RoomAdapter.OnItemClickListener() {
@@ -57,8 +67,10 @@ public class RoomActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            room.add(new Room("Bedroom", R.drawable.ic_bed,defaultAppliances));
-            room.add(new Room("Study Room", R.drawable.study_room,defaultAppliances));
+            room.add(new Room("Bedroom", roomCounter, R.drawable.ic_bed, defaultAppliances));
+            roomCounter++;
+            room.add(new Room("Study Room", roomCounter, R.drawable.study_room, room2Appliances));
+            roomCounter++;
             return null;
         }
 
