@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         isLoggedIn = preferences.getBoolean("isLoggedIn", false);
 
         if (isLoggedIn) {
-            Intent accountsIntent = new Intent(activity, MainActivity.class);
+            Intent accountsIntent = new Intent(activity, RoomActivity.class);
             startActivity(accountsIntent);
         } else {
             initViews();
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("isLoggedIn", true);
             editor.apply();
-            Intent accountsIntent = new Intent(activity, MainActivity.class);
+            Intent accountsIntent = new Intent(activity, RoomActivity.class);
             //  accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
             startActivity(accountsIntent);

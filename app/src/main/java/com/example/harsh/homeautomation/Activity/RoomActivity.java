@@ -8,6 +8,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.harsh.homeautomation.Models.Room;
 import com.example.harsh.homeautomation.R;
@@ -24,12 +29,40 @@ public class RoomActivity extends AppCompatActivity {
     private ArrayList<String> defaultAppliances;
     private ArrayList<String> room2Appliances;
     private int roomCounter = 0;
+    private EditText ipAddress;
+    private Button enter;
+    WebView browser;
+    Button logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
-        listView = findViewById(R.id.listview);
+
+        logOut = (Button) findViewById(R.id.log_out);
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginActivity.setLogInStatus(false);
+                Intent intent = new Intent(RoomActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ipAddress = (EditText) findViewById(R.id.ipAddress);
+
+        browser = (WebView) findViewById(R.id.webView);
+        enter = (Button) findViewById(R.id.enter);
+
+        // Not needed
+        enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                browser.loadUrl("http://" + ipAddress.getText().toString());
+            }
+        });
+
+        listView = findViewById(R.id.listview1);
         defaultAppliances = new ArrayList<>();
         defaultAppliances.add("Light");
         defaultAppliances.add("Fan");
@@ -46,6 +79,7 @@ public class RoomActivity extends AppCompatActivity {
             public void onItemClick(Room item) {
                 Intent i = new Intent(RoomActivity.this, AppliancesActivity.class);
                 i.putExtra("Room",item);
+                i.putExtra("IPAddress",ipAddress.getText().toString());
                 startActivity(i);
             }
         });
@@ -56,7 +90,7 @@ public class RoomActivity extends AppCompatActivity {
     }
 
     private void initiateViews(int rows) {
-        RecyclerView listView = findViewById(R.id.listview);
+        RecyclerView listView = findViewById(R.id.listview1);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, rows);
         listView.setLayoutManager(mLayoutManager);
         listView.setItemAnimator(new DefaultItemAnimator());

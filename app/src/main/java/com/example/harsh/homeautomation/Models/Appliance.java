@@ -1,6 +1,7 @@
 package com.example.harsh.homeautomation.Models;
 
 public class Appliance {
+
     String name;
     Boolean status;
     String clientID;

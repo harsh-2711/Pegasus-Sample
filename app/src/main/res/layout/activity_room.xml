@@ -1,16 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.RoomActivity">
+    tools:context=".Activity.RoomActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter IP"
+            android:textSize="20sp"
+            android:id="@+id/ipAddress"
+            android:layout_weight="11"
+            android:text="192.168.43.182"
+            android:focusableInTouchMode="false"/>
+
+        <Button
+            android:id="@+id/enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter"
+            android:layout_weight="2" />
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/listview"
+        android:id="@+id/listview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:scrollbars="none" />
 
-</android.support.constraint.ConstraintLayout>
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible">
+
+    </WebView>
+
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG OUT"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

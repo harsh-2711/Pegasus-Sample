@@ -1,5 +1,6 @@
 package com.example.harsh.homeautomation.Adapter;
 
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
@@ -13,6 +14,7 @@ import com.example.harsh.homeautomation.Models.Appliance;
 import com.example.harsh.homeautomation.R;
 
 import java.util.List;
+import java.util.logging.Handler;
 
 public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.Holder> {
 
@@ -47,16 +49,19 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.Hold
 
         public void setup(final Appliance appliance) {
             applianceName.setText(appliance.getName());
-            clientID.setText(appliance.getClientID());
             powerConsumed.setText(appliance.getPowerConsumed());
+            clientID.setText(appliance.getClientID());
             applianceStatus.setChecked(appliance.getStatus());
             timeElapsed.setText(String.valueOf(appliance.getTimeElapsed()));
 
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            applianceStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onItemClick(appliance);
+                    if(appliance.getStatus())
+                        appliance.setStatus(false);
+                    else
+                        appliance.setStatus(true);
                 }
             });
         }
@@ -86,7 +91,17 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.Hold
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Appliance item);
+        void onItemClick(Appliance appliance);
+    }
+
+    public void deleteItem(int index) {
+        applianceList.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public void addItem(int index, Appliance appliance) {
+        applianceList.add(index, appliance);
+        notifyItemInserted(index);
     }
 
 }

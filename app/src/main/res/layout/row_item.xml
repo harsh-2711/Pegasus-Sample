@@ -42,7 +42,7 @@
                         android:layout_weight="0.7"
                         android:checked="false"
                         android:gravity="center"
-                        android:text="ON"
+                        android:text="OFF"
                         android:textStyle="bold"
                         android:theme="@style/SwitchCompatTheme" />
 
@@ -51,7 +51,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
                         android:gravity="center"
-                        android:text="OFF"
+                        android:text="ON"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
