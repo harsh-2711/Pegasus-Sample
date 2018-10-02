@@ -15,6 +15,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.harsh.homeautomation.Adapter.ApplianceAdapter;
@@ -35,12 +36,14 @@ public class AppliancesActivity extends AppCompatActivity {
     WebView internet;
     public String IPAddress;
     public String data;
+    public TextView rawString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appliances);
         internet = (WebView) findViewById(R.id.internet);
+        rawString = (TextView) findViewById(R.id.rawString);
 
         room = (Room) getIntent().getSerializableExtra("Room");
         IPAddress = (String) getIntent().getStringExtra("IPAddress");
@@ -157,6 +160,7 @@ public class AppliancesActivity extends AppCompatActivity {
             //Get the string value to process
             this.data = data;
             String st = "";
+            rawString.setText("Raw String: " + data);
             for(int i = 0; i < data.length(); i++){
                 if(i == 8 || i == 9 || i == 10 || i ==11)
                     st += data.charAt(i);
@@ -210,6 +214,8 @@ public class AppliancesActivity extends AppCompatActivity {
                     if(appliances.get(i).getStatus()) {
                         if(st != "0.00") {
                             ArrayList<String> abc = new ArrayList<>();
+                            String placeHolder = "Raw String: " + data;
+                            rawString.setText(placeHolder);
                             abc.add(st);
                             new Append().execute(abc);
                         }
