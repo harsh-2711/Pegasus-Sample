@@ -21,7 +21,7 @@
             android:textSize="20sp"
             android:id="@+id/ipAddress"
             android:layout_weight="11"
-            android:text="192.168.43.182"
+            android:text="192.168.1.104"
             android:focusableInTouchMode="false"/>
 
         <Button
@@ -33,27 +33,44 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listview1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:scrollbars="none" />
+        android:orientation="vertical"
+        android:paddingBottom="40dp">
 
-    <WebView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listview1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+
+   <WebView
         android:id="@+id/webView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="invisible">
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+       android:visibility="gone">
 
     </WebView>
 
-    <Button
-        android:id="@+id/log_out"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LOG OUT"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"/>
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/log_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOG OUT"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

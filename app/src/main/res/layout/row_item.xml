@@ -72,7 +72,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CLient ID :  " />
+                    android:text="Appliance number :  " />
 
                 <TextView
                     android:id="@+id/client_id"

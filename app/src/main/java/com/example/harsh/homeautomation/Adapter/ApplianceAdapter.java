@@ -50,7 +50,7 @@ public class ApplianceAdapter extends RecyclerView.Adapter<ApplianceAdapter.Hold
         public void setup(final Appliance appliance) {
             applianceName.setText(appliance.getName());
             powerConsumed.setText(appliance.getPowerConsumed());
-            clientID.setText(appliance.getClientID());
+            clientID.setText(appliance.getApplicationID());
             applianceStatus.setChecked(appliance.getStatus());
             timeElapsed.setText(String.valueOf(appliance.getTimeElapsed()));
 

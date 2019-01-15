@@ -27,7 +27,7 @@ public class RoomActivity extends AppCompatActivity {
     RecyclerView listView;
     private RoomAdapter adapter;
     private ArrayList<String> defaultAppliances;
-    private ArrayList<String> room2Appliances;
+    private ArrayList<String> room2Appliances, room3Appliances, room4Appliances, room5Appliances;
     private int roomCounter = 0;
     private EditText ipAddress;
     private Button enter;
@@ -67,11 +67,32 @@ public class RoomActivity extends AppCompatActivity {
         defaultAppliances.add("Light");
         defaultAppliances.add("Fan");
         defaultAppliances.add("AC");
+        defaultAppliances.add("Heater");
+
         room2Appliances = new ArrayList<>();
         room2Appliances.add("Light");
         room2Appliances.add("Fan");
         room2Appliances.add("AC");
         room2Appliances.add("Heater");
+
+        room3Appliances = new ArrayList<>();
+        room3Appliances.add("Light");
+        room3Appliances.add("Fan");
+        room3Appliances.add("AC");
+        room3Appliances.add("Heater");
+
+        room4Appliances = new ArrayList<>();
+        room4Appliances.add("Light");
+        room4Appliances.add("Fan");
+        room4Appliances.add("AC");
+        room4Appliances.add("Heater");
+
+        room5Appliances = new ArrayList<>();
+        room5Appliances.add("Light");
+        room5Appliances.add("Fan");
+        room5Appliances.add("AC");
+        room5Appliances.add("Heater");
+
         room = new ArrayList<>();
 
         adapter = new RoomAdapter(this, room, new RoomAdapter.OnItemClickListener() {
@@ -101,9 +122,15 @@ public class RoomActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            room.add(new Room("Bedroom", roomCounter, R.drawable.ic_bed, defaultAppliances));
+            room.add(new Room("Room1", roomCounter, R.drawable.ic_bed, defaultAppliances));
             roomCounter++;
-            room.add(new Room("Study Room", roomCounter, R.drawable.study_room, room2Appliances));
+            room.add(new Room("Room2", roomCounter, R.drawable.study_room, room2Appliances));
+            roomCounter++;
+            room.add(new Room("Room3", roomCounter, R.drawable.ic_bed, room3Appliances));
+            roomCounter++;
+            room.add(new Room("Room4", roomCounter, R.drawable.study_room, room4Appliances));
+            roomCounter++;
+            room.add(new Room("Room5", roomCounter, R.drawable.ic_bed, room5Appliances));
             roomCounter++;
             return null;
         }

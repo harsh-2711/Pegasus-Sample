@@ -66,6 +66,12 @@ public class AppliancesActivity extends AppCompatActivity {
 
                 // Web View*****
 
+                if(Integer.valueOf(item.getClientID()) > 0 && Integer.valueOf(item.getClientID()) < 10) {
+                    IPAddress = IPAddress + ":350" + item.getClientID();
+                }
+                else if(Integer.valueOf(item.getClientID()) >= 10) {
+                    IPAddress = IPAddress + ":35" + item.getClientID();
+                }
                 internet.loadUrl("http://" + IPAddress);
                 internet.getSettings().setJavaScriptEnabled(true);
                 internet.getSettings().setDomStorageEnabled(true);
@@ -93,7 +99,7 @@ public class AppliancesActivity extends AppCompatActivity {
                             onoff = 1;
                         else
                             onoff = 0;
-                                data = "$A$c" + item.getClientID() + "$" + String.valueOf(onoff) +"$0$";
+                                data = "#$A$a1$c" + item.getClientID() + "$" + String.valueOf(item.getSupportID()) + "$" + String.valueOf(onoff) +"$#";
                                 String javascript = "javascript:var x = document.getElementById('txbuff').value ='" + data + "'; var y = document.getElementById('txbuff1').click();";
                                 internet.loadUrl(javascript);
                                 data="";
@@ -125,9 +131,15 @@ public class AppliancesActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             for (int i = 0; i < roomAppliances.size(); i++) {
                 if (room.getRoomID() == 0) {
-                    appliances.add(new Appliance(roomAppliances.get(i), false, String.valueOf(room.getRoomID() + i + 1), "0", 0));
-                } else {
-                    appliances.add(new Appliance(roomAppliances.get(i), false, String.valueOf(room.getRoomID() + i + 3), "0", 0));
+                    appliances.add(new Appliance(roomAppliances.get(i), false, String.valueOf(room.getRoomID()+1), String.valueOf(room.getRoomID() + i + 1), String.valueOf(i+1),"0", 0));
+                } else if(room.getRoomID() == 1) {
+                    appliances.add(new Appliance(roomAppliances.get(i), false, String.valueOf(room.getRoomID()+1), String.valueOf(room.getRoomID() + i + 4), String.valueOf(i+1), "0", 0));
+                } else if(room.getRoomID() == 2) {
+                    appliances.add(new Appliance(roomAppliances.get(i), false, String.valueOf(room.getRoomID()+1), String.valueOf(room.getRoomID() + i + 7), String.valueOf(i+1), "0", 0));
+                } else if(room.getRoomID() == 3) {
+                    appliances.add(new Appliance(roomAppliances.get(i), false, String.valueOf(room.getRoomID()+1), String.valueOf(room.getRoomID() + i + 10), String.valueOf(i+1), "0", 0));
+                } else if(room.getRoomID() == 4) {
+                    appliances.add(new Appliance(roomAppliances.get(i), false, String.valueOf(room.getRoomID()+1), String.valueOf(room.getRoomID() + i + 13), String.valueOf(i+1), "0", 0));
                 }
             }
             return null;
@@ -161,6 +173,8 @@ public class AppliancesActivity extends AppCompatActivity {
             this.data = data;
             String st = "";
             rawString.setText("Raw String: " + data);
+
+/*
             for(int i = 0; i < data.length(); i++){
                 if(i == 8 || i == 9 || i == 10 || i ==11)
                     st += data.charAt(i);
@@ -232,6 +246,7 @@ public class AppliancesActivity extends AppCompatActivity {
                 }
 
             }
+*/
 
 
         }
@@ -244,7 +259,7 @@ public class AppliancesActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(ArrayList<String>... arrayLists) {
             appliances.remove(1);
-            appliances.add(1, new Appliance(roomAppliances.get(1), true, String.valueOf(2), arrayLists[0].get(0).toString(), 0));
+            appliances.add(1, new Appliance(roomAppliances.get(1), true, String.valueOf(room.getRoomID()+1), String.valueOf(2), String.valueOf(1), arrayLists[0].get(0).toString(), 0));
             return null;
         }
 
